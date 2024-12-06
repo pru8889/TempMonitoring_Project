@@ -1,0 +1,65 @@
+@startuml name Dynamic
+title Dynamic Architecture: Temperature monitoring flow
+
+box "PersistentMemory" #LightSlateGray
+    database "EEPROM" as ee
+end box
+
+box "Temperature-Sensing" #LightBlue
+participant "TempSensor" as Ts 
+end box
+
+!pragma teoz true
+box "µC Domain"
+    participant "ADC" as adc
+    participant "Hw variation" as hw
+    participant "Timer-100µsec" as int
+    box "Adc Control" #LightCoral
+        participant "adcIsrhandling" as Isr
+        participant "adcSampling" as sample
+    end box  
+
+
+    box "Temperature Monitoring" #LightGreen
+        participant "TempMonitor" as tm
+        participant "gpio" as gp
+    end box
+end box    
+
+
+
+== Initialization Mode ==
+ee <-- hw: Fetch Hw variation during each \n powercycle init phase via I2C
+activate hw
+deactivate hw
+== Normal Mode ==
+activate adc
+Ts --> adc: Analog values are transmitted \n to adc every 100µsec
+adc -> adc: Perform analog to digital \n conversion
+int --> Isr: Isr is triggered every 100µsec \n when timer expires
+activate Isr
+Isr --> adc: Fetch adc values
+Isr -> Isr: Store in an array \n recieved adc values
+note over Isr, sample
+After recieving 10 adc samples
+end note
+activate sample
+Isr --> sample: Trigger ADC sampling
+deactivate Isr
+hw <-- sample: Fetch HW revision info
+sample -> sample: Convert adc value \n to temperature based on \n HW REV
+sample -> Isr: Release trigger to store \n new adc values
+note over Isr
+Perform buffering of adc values as before
+end note
+sample --> tm: Trigger Monitoring
+deactivate sample
+activate tm
+tm --> sample: fetch temperature values
+tm -> tm: Perform \n moving average \n of 10 adc samples
+tm -> tm : Compare against the \n temperature ranges 
+activate gp
+tm -> gp: Trigger appropriate GPIO \n to represent temperature range 
+deactivate tm
+deactivate gp
+@enduml

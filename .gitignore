@@ -1,0 +1,4 @@
+/sw/build/
+/.vscode/
+/hooks/
+/sw-cpp/build

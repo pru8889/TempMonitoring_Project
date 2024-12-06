@@ -1,0 +1,18 @@
+@startuml staticarch
+left to right direction
+title System under Development
+package "TemperatureMontoring" {
+    [eepromAccess] as ea
+    package "adcControl" as adc{
+    [adcInterruptHandler] as adcIsr
+    [adcSampling] as adcSamp
+    }
+    [tempMonitor] as tmp
+    [gpioControl] as gpio
+}
+
+adcIsr --> adcSamp
+ea --> adcSamp
+adc --> tmp
+tmp --> gpio
+@enduml
