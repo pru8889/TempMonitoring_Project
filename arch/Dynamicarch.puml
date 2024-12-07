@@ -13,15 +13,18 @@ end box
 !pragma teoz true
 box "µC Domain"
 participant "Hw variation" as hw
+participant "Timer-100µsec" as int
 box "Temperature-Monitoring" #LightCoral
-participant "adcIsrhandling"
-participant "adcSampling"
+participant "adcIsrhandling" as Isr
+participant "adcSampling" as sample
 end box
 
 
-
- 
-ee --> hw: Read Hw variation during each powercycle init phase
-Ts --> adc: Analog values are transmitted to adc 
+== Initialization Mode ==
+ee --> hw: Read Hw variation during each powercycle init phase via I2C
+hw --> sample: Provide HW version info
+== Normal Mode ==
+Ts --> adc: Analog values are transmitted to adc
+Isr --> Isr: 
 
 @enduml
