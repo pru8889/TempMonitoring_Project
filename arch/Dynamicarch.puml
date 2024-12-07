@@ -1,0 +1,27 @@
+@startuml name Dynamic
+title Dynamic Architecture: Temperature monitoring flow
+
+box "PersistentMemory" #LightSlateGray
+    database "EEPROM" as ee
+end box
+
+box "Temperature-Sensing" #LightBlue
+participant "TempSensor" as Ts 
+participant "ADC" as adc
+end box
+
+!pragma teoz true
+box "µC Domain"
+participant "Hw variation" as hw
+box "Temperature-Monitoring" #LightCoral
+participant "adcIsrhandling"
+participant "adcSampling"
+end box
+
+
+
+ 
+ee --> hw: Read Hw variation during each powercycle init phase
+Ts --> adc: Analog values are transmitted to adc 
+
+@enduml
