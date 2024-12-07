@@ -1,7 +1,10 @@
 @startuml
 package "TemperatureMontoring" {
     [eepromAccess] as ea
-    [adcControl] as adc
+    package "adcControl" as adc{
+    [adcInterruptHandler] as adcIsr
+    [adcSampling]
+    }
     [tempMonitor] as tmp
     [gpioControl] as gpio
 }
