@@ -1,0 +1,12 @@
+@startuml
+package "TemperatureMontoring" {
+    [eepromAccess] as ea
+    [adcControl] as adc
+    [tempMonitor] as tmp
+    [gpioControl] as gpio
+}
+
+ea --> tmp
+adc --> tmp
+tmp --> gpio
+@enduml
