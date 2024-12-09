@@ -12,12 +12,20 @@ end box
 
 !pragma teoz true
 box "µC Domain"
-participant "Hw variation" as hw
-participant "Timer-100µsec" as int
-box "Temperature-Monitoring" #LightCoral
-participant "adcIsrhandling" as Isr
-participant "adcSampling" as sample
-end box
+    participant "Hw variation" as hw
+    participant "Timer-100µsec" as int
+    box "Adc Control" #LightCoral
+        participant "adcIsrhandling" as Isr
+        participant "adcSampling" as sample
+    end box  
+
+
+    box "Temperature Monitoring" #LightGreen
+        participant "TempMonitor" as tm
+        participant "gpio" as gp
+    end box
+end box    
+
 
 
 == Initialization Mode ==
@@ -25,6 +33,11 @@ ee --> hw: Read Hw variation during each powercycle init phase via I2C
 hw --> sample: Provide HW version info
 == Normal Mode ==
 Ts --> adc: Analog values are transmitted to adc
-Isr --> Isr: 
-
+int --> Isr: Isr is triggered every 100msec \n when timer expires 
+Isr -> Isr: Store in an array \n recieved adc values
+note over Isr, sample
+After recieving 10 adc samples
+end note
+Isr --> sample: Event is triggered
+sample -> sample: Perform \n moving average \n of 10 samples 
 @enduml
