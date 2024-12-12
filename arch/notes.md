@@ -10,4 +10,6 @@
 
 [x] Write init notes mentioning that config of ADC is out of scope of the task
 
+
+## Interview questions
 [ ] Ask about job description and what is expected from your role

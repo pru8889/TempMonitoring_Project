@@ -38,6 +38,15 @@ Isr -> Isr: Store in an array \n recieved adc values
 note over Isr, sample
 After recieving 10 adc samples
 end note
-Isr --> sample: Event is triggered
-sample -> sample: Perform \n moving average \n of 10 samples 
+Isr --> sample: Trigger Adc sampling
+activate sample
+sample -> sample: Perform \n moving average \n of 10 adc samples
+destroy sample
+sample --> tm: Trigger Monitoring
+activate tm
+tm --> sample: fetch averaged adc value
+tm -> tm : Convert adc value \n to temperature based on the HW
+tm -> tm : Compare against the  temperature ranges 
+tm -> gp: Trigger appropriate GPIO \n to represent temperature range
+destroy tm
 @enduml
