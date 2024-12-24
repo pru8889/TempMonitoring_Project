@@ -1,4 +1,4 @@
-@startuml
+@startuml staticarch
 title System under Development
 package "TemperatureMontoring" {
     [eepromAccess] as ea
