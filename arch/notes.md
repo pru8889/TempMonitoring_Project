@@ -11,11 +11,14 @@
 [x] Write init notes mentioning that config of ADC is out of scope of the task
 
 ## Dec 24 todo list
-[ ] Read HW version from input 
-[ ] Create enums to read HW version from O or 1
-[ ] Create Cmake project
+[x] Read HW version from input 
+[x] Create enums to read HW version from O or 1
 [ ] Check file names hint: Change hello.c to init or something
 [ ] Fix bug considering float values
+
+## Dec 25 todo list
+[ ] Create Cmake project
+[ ] 
 
 ## Interview questions
 [ ] Ask about job description and what is expected from your role
