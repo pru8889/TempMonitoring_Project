@@ -17,8 +17,10 @@
 [ ] Fix bug considering float values
 
 ## Dec 25 todo list
-[ ] Create Cmake project
-[ ] 
+[x] Create Cmake project
+[x] Update Cmake project to add adcsampling
+[x] Basic skeleton created
+[ ] Create function for adc sampling 
 
 ## Interview questions
 [ ] Ask about job description and what is expected from your role

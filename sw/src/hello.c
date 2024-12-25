@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <read_hwvariation.h>
 
-
-
 hw_variation_enum_t read_hwvariation(int hw_variation) {
     printf("HW Variation: %d\n", hw_variation);
     hw_variation_enum_t hw_variation_enum;

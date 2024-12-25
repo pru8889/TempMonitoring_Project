@@ -7,5 +7,5 @@ typedef enum {
     REV_B = 1
 } hw_variation_enum_t;
 
-
+hw_variation_enum_t read_hwvariation(int hw_variation);
 #endif // READ_HWVARIATION_H 
