@@ -3,13 +3,9 @@
 
 // Include necessary headers
 #include <stdint.h>
+#include <read_hwvariation.h>
 
-// Define constants and macros
-#define ADC_MAX_VALUE 1023
-#define ADC_MIN_VALUE 0
-
-// Declare functions
-void initADC();
-uint16_t readADC(uint8_t channel);
+// Declare function prototypes
+float processADCValue(uint8_t *adc_rawinput, hw_variation_enum_t hw_variation);
 
 #endif // ADCSAMPLING_H

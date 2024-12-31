@@ -3,9 +3,13 @@
 
 //Define enum for the hardware variations
 typedef enum {
-    REV_A = 0,
-    REV_B = 1
+    REV_A = 0U,
+    REV_B = 1U
 } hw_variation_enum_t;
+
+//Define constants for the hardware variations
+#define REV_A_OFFSET 1.0f
+#define REV_B_OFFSET 0.1f
 
 hw_variation_enum_t read_hwvariation(int hw_variation);
 #endif // READ_HWVARIATION_H 

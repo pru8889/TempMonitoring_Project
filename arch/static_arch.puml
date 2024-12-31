@@ -4,12 +4,13 @@ package "TemperatureMontoring" {
     [eepromAccess] as ea
     package "adcControl" as adc{
     [adcInterruptHandler] as adcIsr
-    [adcSampling]
+    [adcSampling] as adcSamp
     }
     [tempMonitor] as tmp
     [gpioControl] as gpio
 }
 
+adcIsr --> adcSamp
 ea --> tmp
 adc --> tmp
 tmp --> gpio
