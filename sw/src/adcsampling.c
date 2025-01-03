@@ -2,27 +2,15 @@
 #include <stdlib.h>
 #include <adcsampling.h>
 
-// int main() {
-//     // Initialize the ADC
-//     initializeADC();
-
-//     // Read ADC value
-//     int adcValue = readADCValue();
-
-//     // Process the ADC value
-//     processADCValue(adcValue);
-
-//     return 0;
-// }
 
 void initializeADC() {
     // Code to initialize the ADC
     printf("ADC Initialized.\n");
 }
 
-float processADCValue(uint8_t *adc_rawinput, hw_variation_enum_t hw_variation) {
+float processADCValue(float *adc_rawinput, hw_variation_enum_t hw_variation) {
     float temp_deg[10];
-    float sum = 0;
+    float current_temperature = 0;
     //Convert values based on the HW Rev-A or Rev-B
     if (REV_A == hw_variation) {
         printf("ADC Value read for HW Rev-A\n");
@@ -37,10 +25,11 @@ float processADCValue(uint8_t *adc_rawinput, hw_variation_enum_t hw_variation) {
     } else {
         printf("Invalid HW Variation\n");
     }
-    // Code to process the ADC value
+    // Calculate average temperature
     for (int i = 0; i < 10; i++) {
-        sum += temp_deg[i];
+        current_temperature += temp_deg[i];
     }
-    float average = sum / 10;
-    return average;
+    current_temperature = current_temperature / 10;
+    printf("Current Temperature: %.2f\n", current_temperature);
+    return current_temperature;
 }
