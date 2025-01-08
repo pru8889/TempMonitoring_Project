@@ -1,5 +1,8 @@
-In order to build the project locally use cmake 3.20.
 
+
+Static and Dynamic architecture are defined [here](arch)
+
+In order to build the project locally use cmake 3.20.
 ## Build Instructions
 
 mkdir sw/build
@@ -14,4 +17,4 @@ make
 ./TempMonitoring_Project
 
 
-PS: The project is build using vscode environment to compile
+PS: The project is build using vscode environment & clang compiler
